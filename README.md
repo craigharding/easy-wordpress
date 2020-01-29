@@ -1,4 +1,3 @@
-![Logo of the project](https://raw.githubusercontent.com/jehna/readme-best-practices/master/sample-logo.png)
 
 # Easy Wordpress
 > An easy implementation of Wordpress in Docker
@@ -9,11 +8,7 @@ easy as 1 2 3.
 ## Installing / Getting started
 
 You will need a system with Docker installed and running. Also depends on 
-docker-compose.
-
-Edit .env and set your project's name. 
-
-Then...
+docker-compose and openssl.
 
 ```shell
 ./gen-passwords.bash
@@ -21,15 +16,11 @@ docker-compose up -d
 ./update-urls.bash
 ```
 
-And finally...
+And then ...
 
 ```shell
 http://<yourProjectName>.localhost:8080
 ```
-
-Your project's name will be used in container, image, and volume labels.
-Use "docker image ls", "docker volume ls", and "docker ps -a" to see 
-the labels.
 
 The gen-passwords.bash script uses openssl to generate three random 
 passwords that are used to secure the mysql database and Portainer
