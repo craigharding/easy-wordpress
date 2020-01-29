@@ -5,8 +5,8 @@ services:
   wordpress:
     build:
       context: ./wordpress
-    image: ${PROJECT_NAME}/wordpress
-    container_name: ${PROJECT_NAME}_wordpress
+    image: ${COMPOSE_PROJECT_NAME}/wordpress
+    container_name: ${COMPOSE_PROJECT_NAME}_wordpress
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
@@ -21,8 +21,8 @@ services:
   db:
     build:
       context: ./mysql
-    image: ${PROJECT_NAME}/mysql
-    container_name: ${PROJECT_NAME}_db
+    image: ${COMPOSE_PROJECT_NAME}/mysql
+    container_name: ${COMPOSE_PROJECT_NAME}_db
     restart: always
     environment:
       MYSQL_DATABASE: wordpress
@@ -35,8 +35,8 @@ services:
   web:
     build:
       context: ./nginx
-    image: ${PROJECT_NAME}/nginx
-    container_name: ${PROJECT_NAME}_frontend
+    image: ${COMPOSE_PROJECT_NAME}/nginx
+    container_name: ${COMPOSE_PROJECT_NAME}_frontend
     restart: always
     volumes:
       - wordpress:/var/www/html
@@ -48,8 +48,8 @@ services:
   portainer:
     build:
       context: ./portainer
-    image: ${PROJECT_NAME}/portainer
-    container_name: ${PROJECT_NAME}_monitor
+    image: ${COMPOSE_PROJECT_NAME}/portainer
+    container_name: ${COMPOSE_PROJECT_NAME}_monitor
     restart: always
     command: --admin-password-file /tmp/portainer_admin_password -H unix:///var/run/docker.sock
     volumes:
