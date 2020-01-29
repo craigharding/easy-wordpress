@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+
+  wordpress:
+    build:
+      context: ./wordpress
+    image: ${PROJECT_NAME}/wordpress
+    container_name: ${PROJECT_NAME}_wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /root/wp_db_password
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - db
+  
+  db:
+    build:
+      context: ./mysql
+    image: ${PROJECT_NAME}/mysql
+    container_name: ${PROJECT_NAME}_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD_FILE: /root/wp_db_password
+      MYSQL_ROOT_PASSWORD_FILE: /root/mysql_root_password
+    volumes:
+      - db:/var/lib/mysql
+
+  web:
+    build:
+      context: ./nginx
+    image: ${PROJECT_NAME}/nginx
+    container_name: ${PROJECT_NAME}_frontend
+    restart: always
+    volumes:
+      - wordpress:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - wordpress
+  
+  portainer:
+    build:
+      context: ./portainer
+    image: ${PROJECT_NAME}/portainer
+    container_name: ${PROJECT_NAME}_monitor
+    restart: always
+    command: --admin-password-file /tmp/portainer_admin_password -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  db:
+  wordpress:
