@@ -24,7 +24,7 @@ docker-compose up -d
 And finally...
 
 ```shell
-http://\<yourProjectName\>.localhost:8080
+http://<yourProjectName>.localhost:8080
 ```
 
 Your project's name will be used in container, image, and volume labels.
@@ -54,7 +54,7 @@ easy Wordpress project.
 Easy Wordpress includes a Portainer container. Access it using: 
 
 ```shell
-http://\<yourProjectName\>.localhost:8080/portainer
+http://<yourProjectName>.localhost:8080/portainer
 ```
 
 Login with "admin" and the contents of the portainer_admin_password file.
