@@ -79,6 +79,10 @@ docker-compose --build
 
 I like Ngrok. You can host this site from home using Ngrok.
 
+```shell
+./ngrok http 8080
+```
+
 Beyond that, the Docker documentation has fine instructions to backup, 
 restore, and migrate your project to another server.
 
