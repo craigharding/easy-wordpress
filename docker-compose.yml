@@ -17,6 +17,9 @@ services:
       - wordpress:/var/www/html
     depends_on:
       - db
+    networks:
+      - sql
+      - engine
   
   db:
     build:
@@ -31,6 +34,8 @@ services:
       MYSQL_ROOT_PASSWORD_FILE: /root/mysql_root_password
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - sql
 
   web:
     build:
@@ -44,6 +49,9 @@ services:
       - 8080:80
     depends_on:
       - wordpress
+    networks:
+      - engine
+      - web
   
   portainer:
     build:
@@ -54,7 +62,18 @@ services:
     command: --admin-password-file /tmp/portainer_admin_password -H unix:///var/run/docker.sock
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - engine
 
 volumes:
   db:
   wordpress:
+
+networks:
+  web:
+    driver: bridge
+  engine:
+    driver: bridge
+  sql:
+    driver: bridge
+    internal: true
