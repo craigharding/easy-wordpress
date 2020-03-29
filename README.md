@@ -5,6 +5,16 @@
 Easy Wordpress will get your CMS up and ready in practically no time. As 
 easy as 1 2 3.
 
+## Features
+
+This is a six container Wordpress CMS. 
+* Nginx is the frontend and serves up the static content
+* PHP is the main Wordpress engine
+* MySql is the datbase
+* Portainer gives you access and views into the containers
+* MailHog is the dummy email server
+* ngrok connects the project to the internet, with TLS
+
 ## Installing / Getting started
 
 You will need a system with Docker installed and running. Also depends on 
@@ -35,7 +45,7 @@ Wordpress home and site URLs to whatever you use to access the site.
 When you connect to the new site you go through the initial Wordpress
 site configuration.
 
-### Initial Configuration
+## Initial Configuration
 
 Only docker, with docker-compose, and openssl are required to startup this
 easy Wordpress project.
@@ -49,6 +59,32 @@ http://<yourProjectName>.localhost:8080/portainer/
 ```
 
 Login with "admin" and the contents of the portainer_admin_password file.
+
+## ngrok
+
+I like [ngrok](https://www.ngrok.com/docs). You can host this site from home using ngrok. Get your
+ngrok URL this way:
+
+```shell
+docker attach <yourProjectName>_nGrok
+```
+And then connect ...
+
+```shell
+https://<someRandomNumber>.ngrok.io
+```
+
+## Email Setup
+
+This environment comes with a [MailHog](https://github.com/mailhog/MailHog) dummy email server. You need to 
+install a WP plugin to send emails to this container. Use the 
+[Easy WP SMTP](https://www.hostinger.com/tutorials/wordpress/how-to-configure-wordpress-to-send-emails-using-smtp "How to Configure WordPress to Send Emails Using SMTP Plugin") plugin. Set the SMTP host to "mailhog", the port to 1025, no authentication, no encryption.
+
+Access the MailHog web UI using:
+
+```shell
+http://<yourProjectName>.localhost:8080/mailhog/
+```
 
 ## Customizing
 
@@ -66,39 +102,7 @@ images:
 docker-compose --build
 ```
 
-## ngrok
-
-I like [ngrok](https://www.ngrok.com/docs). You can host this site from home using ngrok. Get your
-ngrok URL this way:
-
-```shell
-docker attach <yourProjectName>_nGrok
-```
-And then connect ...
-
-```shell
-https://<someRandomNumber>.ngrok.io
-```
-
-### Email Setup
-
-This environment comes with a [MailHog](https://github.com/mailhog/MailHog) dummy email server. You need to 
-install a WP plugin to send emails to this container. Use the 
-[Easy WP SMTP](https://www.hostinger.com/tutorials/wordpress/how-to-configure-wordpress-to-send-emails-using-smtp "How to Configure WordPress to Send Emails Using SMTP Plugin") plugin. Set the SMTP host to "mailhog", the port to 1025, no authentication, no encryption.
-
-Access the MailHog web UI using:
-
-```shell
-http://<yourProjectName>.localhost:8080/mailhog/
-```
-
-## Features
-
-This is a four container Wordpress CMS. 
-* Nginx is the frontend and serves up the static content
-* PHP is the main Wordpress engine
-* MySql is the datbase
-* Portainer gives you access and views into the containers
+If you have an [ngrok account](https://dashboard.ngrok.com/login "Login"), put your auth token in the ngrok.yml file along with any other customizations to get your utilize the features available to your [plan](https://www.ngrok.com/pricing "ngrok Plans").
 
 ## Contributing
 
