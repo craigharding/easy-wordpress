@@ -45,7 +45,7 @@ easy Wordpress project.
 Easy Wordpress includes a Portainer container. Access it using: 
 
 ```shell
-http://<yourProjectName>.localhost:8080/portainer
+http://<yourProjectName>.localhost:8080/portainer/
 ```
 
 Login with "admin" and the contents of the portainer_admin_password file.
@@ -66,16 +66,31 @@ images:
 docker-compose --build
 ```
 
-### Deploying / Publishing
+## ngrok
 
-I like Ngrok. You can host this site from home using Ngrok.
+I like [ngrok](https://www.ngrok.com/docs). You can host this site from home using ngrok. Get your
+ngrok URL this way:
 
 ```shell
-./ngrok http 8080
+docker attach <yourProjectName>_nGrok
+```
+And then connect ...
+
+```shell
+https://<someRandomNumber>.ngrok.io
 ```
 
-Beyond that, the Docker documentation has fine instructions to backup, 
-restore, and migrate your project to another server.
+### Email Setup
+
+This environment comes with a [MailHog](https://github.com/mailhog/MailHog) dummy email server. You need to 
+install a WP plugin to send emails to this container. Use the 
+[Easy WP SMTP](https://www.hostinger.com/tutorials/wordpress/how-to-configure-wordpress-to-send-emails-using-smtp "How to Configure WordPress to Send Emails Using SMTP Plugin") plugin. Set the SMTP host to "mailhog", the port to 1025, no authentication, no encryption.
+
+Access the MailHog web UI using:
+
+```shell
+http://<yourProjectName>.localhost:8080/mailhog/
+```
 
 ## Features
 

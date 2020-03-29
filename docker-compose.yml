@@ -65,8 +65,31 @@ services:
     networks:
       - engine
 
+  ngrok:
+    build:
+      context: ./ngrok
+    image: ${COMPOSE_PROJECT_NAME}/ngrok
+    container_name: ${COMPOSE_PROJECT_NAME}_ngrok
+    restart: always
+    networks:
+      - engine
+    tty: true
+    
+  mailhog:
+    image: mailhog/mailhog
+    container_name: ${COMPOSE_PROJECT_NAME}_mailhog
+    restart: always
+    environment:
+      MH_HOSTNAME: mail.${COMPOSE_PROJECT_NAME}.org
+      MH_MAILDIR_PATH: /var/mail
+    volumes:
+      - email:/var/mail
+    networks:
+      - engine
+        
 volumes:
   db:
+  email:
   wordpress:
 
 networks:
