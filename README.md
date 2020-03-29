@@ -95,14 +95,14 @@ I also recommend configuring your site's upload limit. There are settings
 for this in both nginx.conf and php.ini. My preference is to leave nginx
 at unlimited and set the threshold in php.ini.
 
+If you have an [ngrok account](https://dashboard.ngrok.com/login "Login"), put your auth token in the ngrok.yml file along with any other customizations to get your utilize the features available to your [plan](https://www.ngrok.com/pricing "ngrok Plans").
+
 Once you have customized some settings you will need to rebuild the Docker
 images:
 
 ```shell
 docker-compose --build
 ```
-
-If you have an [ngrok account](https://dashboard.ngrok.com/login "Login"), put your auth token in the ngrok.yml file along with any other customizations to get your utilize the features available to your [plan](https://www.ngrok.com/pricing "ngrok Plans").
 
 ## Contributing
 
