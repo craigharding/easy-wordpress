@@ -1,6 +1,0 @@
-authtoken: 1WrDw5kmXFxSsBnpwpi4itwzqaI_3YgVEpLaci6Ldzz965dKT
-tunnels:
-    wordpress:
-      addr: web:80
-      proto: http
-      subdomain: bhha22936  
